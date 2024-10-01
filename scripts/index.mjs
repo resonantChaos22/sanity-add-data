@@ -1,4 +1,5 @@
 import SanityClient from "./sanity-client.mjs";
+import { ProcessCSV } from "./utils.mjs";
 
 const Run = async () => {
   try {
@@ -10,7 +11,12 @@ const Run = async () => {
       "2024-01-24"
     );
 
+    let data = await ProcessCSV("persons.csv");
+    console.log(data);
+
+    await sanityClient.GetAllAssets();
     await sanityClient.GetAllDocumentsOfType("movie");
+    await sanityClient.GetAllPersons();
   } catch (err) {
     console.log(err);
     console.log("Final Cutoff");
