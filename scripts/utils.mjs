@@ -38,17 +38,17 @@ const GetImageFile = async (fileName) => {
   }
 };
 
-const WriteIntoJSONFile = async (fileName, data, folderName = "output") => {
+const WriteIntoJSONFile = async (fileName, data, folderName = "default") => {
   try {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
-    const dirname = path.join(__dirname, folderName);
+    const dirname = path.join(__dirname, `outputs/${folderName}`);
     if (!fs.existsSync(dirname)) {
       fs.mkdirSync(dirname, { recursive: true });
     }
 
     fs.writeFileSync(
-      `${folderName}/${fileName}`,
+      `${dirname}/${fileName}`,
       JSON.stringify(data, null, 2),
       "utf-8"
     );
