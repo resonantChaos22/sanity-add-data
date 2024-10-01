@@ -1,5 +1,9 @@
 import SanityClient from "./sanity-client.mjs";
-import { ProcessCSV } from "./utils.mjs";
+import * as utils from "./utils.mjs";
+
+/**
+ * @typedef {import('@sanity/client').SanityClient} SanityClient
+ */
 
 const Run = async () => {
   try {
@@ -11,18 +15,19 @@ const Run = async () => {
       "2024-01-24"
     );
 
-    let data = await ProcessCSV("persons.csv");
+    let data = await utils.ProcessCSV("persons.csv");
     console.log(data);
-
-    await sanityClient.GetAllAssets();
-    await sanityClient.GetAllDocumentsOfType("movie");
-    await sanityClient.GetAllPersons();
   } catch (err) {
     console.log(err);
     console.log("Final Cutoff");
   }
 };
 
+/**
+ * Runs the flow of adding one person and then deleting it.
+ *
+ * @param {SanityClient} sanityClient - The sanity client instance.
+ */
 const flowOne = async (sanityClient) => {
   let persons = await sanityClient.GetAllPersons();
   console.log(persons.length);
@@ -40,6 +45,18 @@ const flowOne = async (sanityClient) => {
 
   persons = await sanityClient.GetAllPersons();
   console.log(persons.length);
+};
+
+/**
+ * Fetches all relevant data from Sanity.
+ *
+ * @param {SanityClient} sanityClient - The sanity client instance.
+ */
+const getAllData = async (sanityClient) => {
+  await sanityClient.GetAllAssets();
+  await sanityClient.GetAllDocumentsOfType("movie");
+  await sanityClient.GetAllDocumentsOfType("screening");
+  await sanityClient.GetAllPersons();
 };
 
 Run();

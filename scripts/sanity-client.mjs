@@ -1,5 +1,5 @@
 import { createClient } from "@sanity/client";
-import { GetImageFile, WriteIntoJSONFile } from "./utils.mjs";
+import * as utils from "./utils.mjs";
 
 class SanityClient {
   client;
@@ -17,7 +17,7 @@ class SanityClient {
   async GetAllPersons() {
     try {
       const persons = await this.client.fetch(`*[_type=='person']`);
-      WriteIntoJSONFile("persons.json", persons);
+      utils.WriteIntoJSONFile("persons.json", persons);
       return persons;
     } catch (err) {
       console.error("Error fetching persons:", err);
@@ -28,7 +28,7 @@ class SanityClient {
   async GetAllDocumentsOfType(type) {
     try {
       const documents = await this.client.fetch(`*[_type=='${type}']`);
-      WriteIntoJSONFile(`${type}s.json`, documents);
+      utils.WriteIntoJSONFile(`${type}s.json`, documents);
       return documents;
     } catch (err) {
       console.error(`Error fetching documents of type ${type}: `, err);
@@ -45,7 +45,7 @@ class SanityClient {
         }
       `;
       const assets = await this.client.fetch(query);
-      WriteIntoJSONFile("assets.json", assets);
+      utils.WriteIntoJSONFile("assets.json", assets);
 
       return assets;
     } catch (err) {
@@ -70,7 +70,7 @@ class SanityClient {
 
   async UploadImage(imageFileName) {
     try {
-      const imageFile = await GetImageFile(imageFileName);
+      const imageFile = await utils.GetImageFile(imageFileName);
 
       const uploadResult = await this.client.assets.upload("image", imageFile, {
         filename: imageFileName,
