@@ -1,5 +1,7 @@
 import SanityClient from "./sanity-client.mjs";
 import * as utils from "./utils.mjs";
+import dotenv from "dotenv";
+dotenv.config();
 
 /**
  * @typedef {import('@sanity/client').SanityClient} SanityClient
@@ -7,16 +9,23 @@ import * as utils from "./utils.mjs";
 
 const Run = async () => {
   try {
+    const sanityProjectId = process.env.SANITY_PROJECT_ID;
+    const sanityDataset = process.env.SANITY_DATASET;
+    const sanityApiVersion = process.env.SANITY_API_VERSION;
+    const sanityToken = process.env.SANITY_TOKEN;
     const sanityClient = new SanityClient(
-      "eanv0g3s",
-      "skd7qQrQk2gzsuNno5l5vIttOLs4LPLvxkoEDNA447jzulOPnfKVDkthMXd94DyQrXz3N1oeLWVc6x5w1xOJmdohBdLEbVzsuAWkOViTxJkQF2Qnz6KBnX0fAP8so6iZEDoo7M9HLmiCM1NNoRBfdKL0JBHTjEAtnzxBZvWx1VeSbAUserpX",
-      "production",
+      sanityProjectId,
+      sanityToken,
+      sanityDataset,
       false,
-      "2024-01-24"
+      sanityApiVersion
     );
 
     let data = await utils.ProcessCSV("persons.csv");
     console.log(data);
+
+    await getAllData(sanityClient);
+    await flowOne(sanityClient);
   } catch (err) {
     console.log(err);
     console.log("Final Cutoff");
