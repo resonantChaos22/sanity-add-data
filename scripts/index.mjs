@@ -10,26 +10,30 @@ const Run = async () => {
       "2024-01-24"
     );
 
-    let persons = await sanityClient.GetAllPersons();
-    console.log(persons.length);
-    let result = await sanityClient.AddPerson(
-      "Brad Pitt",
-      "brad-pitt.jpg",
-      "brad-pitt"
-    );
-
-    persons = await sanityClient.GetAllPersons();
-    console.log(persons.length);
-
-    let deleteResult = await sanityClient.DeletePerson(result._id);
-    console.log(deleteResult);
-
-    person = await sanityClient.GetAllPersons();
-    console.log(persons.length);
+    await sanityClient.GetAllDocumentsOfType("movie");
   } catch (err) {
     console.log(err);
     console.log("Final Cutoff");
   }
+};
+
+const flowOne = async (sanityClient) => {
+  let persons = await sanityClient.GetAllPersons();
+  console.log(persons.length);
+  let result = await sanityClient.AddPerson(
+    "Brad Pitt",
+    "brad-pitt.jpg",
+    "brad-pitt"
+  );
+
+  persons = await sanityClient.GetAllPersons();
+  console.log(persons.length);
+
+  let deleteResult = await sanityClient.DeletePerson(result._id);
+  console.log(deleteResult);
+
+  persons = await sanityClient.GetAllPersons();
+  console.log(persons.length);
 };
 
 Run();

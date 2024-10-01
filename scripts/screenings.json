@@ -1,0 +1,122 @@
+[
+  {
+    "endAt": "1983-06-20T19:34:00.000Z",
+    "_updatedAt": "2024-09-27T10:26:58Z",
+    "beginAt": "1983-06-20T18:00:00.000Z",
+    "movie": {
+      "_ref": "movie_78",
+      "_type": "reference"
+    },
+    "_type": "screening",
+    "location": {
+      "lng": -108,
+      "lat": 41
+    },
+    "_id": "drafts.screening_1_movie_78",
+    "allowedGuests": "members",
+    "_createdAt": "2018-06-13T08:57:45Z",
+    "_rev": "eef48090-bae5-41f2-b678-8fb9d0c8e928",
+    "published": true,
+    "title": "Blade Runner for the first time"
+  },
+  {
+    "movie": {
+      "_ref": "movie_157336",
+      "_type": "reference"
+    },
+    "_createdAt": "2018-06-13T08:57:45Z",
+    "_rev": "RIFL74g4hBJEHJqG0Tm3vW",
+    "_type": "screening",
+    "_id": "screening_1_movie_157336",
+    "allowedGuests": "anyone",
+    "published": true,
+    "endAt": "2015-05-23T09:36:00.000Z",
+    "beginAt": "2015-05-23T06:00:00.000Z",
+    "location": {
+      "lng": -104,
+      "lat": 38
+    },
+    "title": "Welcome to our premiere of Interstellar!",
+    "_updatedAt": "2024-09-27T10:18:17Z"
+  },
+  {
+    "beginAt": "2017-12-08T12:00:00.000Z",
+    "_type": "screening",
+    "location": {
+      "lat": 38,
+      "lng": -103
+    },
+    "_id": "screening_1_movie_335984",
+    "endAt": "2017-12-08T15:14:00.000Z",
+    "_updatedAt": "2024-09-27T10:18:17Z",
+    "movie": {
+      "_ref": "movie_335984",
+      "_type": "reference"
+    },
+    "_createdAt": "2018-06-13T08:57:45Z",
+    "_rev": "RIFL74g4hBJEHJqG0Tm3vW",
+    "allowedGuests": "members",
+    "published": true,
+    "title": "Welcome to our premiere of Blade Runner 2049!"
+  },
+  {
+    "beginAt": "1983-06-20T18:00:00.000Z",
+    "_id": "screening_1_movie_78",
+    "allowedGuests": "members",
+    "title": "Blade Runner for the first time",
+    "published": true,
+    "endAt": "1983-06-20T19:34:00.000Z",
+    "_updatedAt": "2024-09-27T10:18:17Z",
+    "movie": {
+      "_type": "reference",
+      "_ref": "movie_78"
+    },
+    "_createdAt": "2018-06-13T08:57:45Z",
+    "_rev": "RIFL74g4hBJEHJqG0Tm3vW",
+    "_type": "screening",
+    "location": {
+      "lng": -108,
+      "lat": 41
+    }
+  },
+  {
+    "_updatedAt": "2024-09-27T10:18:17Z",
+    "beginAt": "2000-05-20T16:00:00.000Z",
+    "_id": "screening_1_movie_926",
+    "title": "First ever screening of Galaxy Quest!",
+    "_type": "screening",
+    "location": {
+      "lat": 38,
+      "lng": -105
+    },
+    "allowedGuests": "anyone",
+    "published": true,
+    "endAt": "2000-05-20T19:28:00.000Z",
+    "movie": {
+      "_ref": "movie_926",
+      "_type": "reference"
+    },
+    "_createdAt": "2018-06-13T08:57:45Z",
+    "_rev": "RIFL74g4hBJEHJqG0Tm3vW"
+  },
+  {
+    "movie": {
+      "_ref": "movie_926",
+      "_type": "reference"
+    },
+    "_createdAt": "2018-06-13T08:57:45Z",
+    "_rev": "RIFL74g4hBJEHJqG0Tm3vW",
+    "_id": "screening_3_movie_926",
+    "endAt": "2000-04-14T17:12:00.000Z",
+    "title": "Wanna see Galaxy Quest again?",
+    "beginAt": "2000-04-14T15:00:00.000Z",
+    "_type": "screening",
+    "location": {
+      "lng": -107,
+      "lat": 41
+    },
+    "allowedGuests": "friends",
+    "published": true,
+    "_updatedAt": "2024-09-27T10:18:17Z"
+  }
+]

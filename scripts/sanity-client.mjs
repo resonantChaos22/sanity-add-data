@@ -31,6 +31,21 @@ class SanityClient {
     }
   }
 
+  async GetAllDocumentsOfType(type) {
+    try {
+      const documents = await this.client.fetch(`*[_type=='${type}']`);
+      fs.writeFileSync(
+        `${type}s.json`,
+        JSON.stringify(documents, null, 2),
+        "utf-8"
+      );
+      return documents;
+    } catch (err) {
+      console.error(`Error fetching documents of type ${type}: `, err);
+      throw err;
+    }
+  }
+
   async GetAllAssets() {
     try {
       const query = `
