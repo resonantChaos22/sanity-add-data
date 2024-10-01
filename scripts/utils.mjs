@@ -40,6 +40,13 @@ const GetImageFile = async (fileName) => {
 
 const WriteIntoJSONFile = async (fileName, data, folderName = "output") => {
   try {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const dirname = path.join(__dirname, folderName);
+    if (!fs.existsSync(dirname)) {
+      fs.mkdirSync(dirname, { recursive: true });
+    }
+
     fs.writeFileSync(
       `${folderName}/${fileName}`,
       JSON.stringify(data, null, 2),
