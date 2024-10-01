@@ -86,18 +86,14 @@ class SanityClient {
 
   async AddPerson(name, imageFileName, slug) {
     try {
-      const uploadResult = await this.UploadImage(imageFileName);
+      let uploadResult;
+      if (imageFileName && imageFileName !== "") {
+        uploadResult = await this.UploadImage(imageFileName);
+      }
 
-      const newPerson = {
+      let newPerson = {
         _type: "person",
         name: name,
-        image: {
-          _type: "image",
-          asset: {
-            _ref: uploadResult._id,
-            _type: "reference",
-          },
-        },
         slug: {
           _type: "slug",
           current: slug,
@@ -105,11 +101,40 @@ class SanityClient {
         },
       };
 
+      if (uploadResult) {
+        newPerson.image = {
+          _type: "image",
+          asset: {
+            _ref: uploadResult._id,
+            _type: "reference",
+          },
+        };
+      }
+
       const createResult = await this.client.create(newPerson);
       console.log("Person created successfully:", createResult);
       return createResult;
     } catch (err) {
       console.error("Error adding person:", err);
+      throw err;
+    }
+  }
+
+  async AddPersonsFromCSV(csvFileName) {
+    try {
+      let data = await utils.ProcessCSV(csvFileName);
+      let results = [];
+      for (const person of data) {
+        let result = await this.AddPerson(
+          person["name"],
+          person["image_name"],
+          person["slug_name"]
+        );
+        results.push(result);
+      }
+      return results;
+    } catch (err) {
+      console.error("Error adding persons from csv: ", err);
       throw err;
     }
   }

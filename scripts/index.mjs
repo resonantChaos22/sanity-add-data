@@ -21,11 +21,8 @@ const Run = async () => {
       sanityApiVersion
     );
 
-    let data = await utils.ProcessCSV("persons.csv");
-    console.log(data);
-
     await getAllData(sanityClient);
-    await flowOne(sanityClient);
+    await flowTwo(sanityClient);
   } catch (err) {
     console.log(err);
     console.log("Final Cutoff");
@@ -54,6 +51,30 @@ const flowOne = async (sanityClient) => {
 
   persons = await sanityClient.GetAllPersons();
   console.log(persons.length);
+  console.log("End of Flow One!");
+};
+
+/**
+ * Runs the flow of adding persons from csv and then deleting them.
+ *
+ * @param {SanityClient} sanityClient - The sanity client instance.
+ */
+const flowTwo = async (sanityClient) => {
+  let persons = await sanityClient.GetAllPersons();
+  console.log(persons.length);
+
+  let results = await sanityClient.AddPersonsFromCSV("persons.csv");
+  persons = await sanityClient.GetAllPersons();
+  console.log(persons.length);
+
+  for (const result of results) {
+    let deleteResult = await sanityClient.DeletePerson(result._id);
+    console.log(deleteResult);
+  }
+
+  persons = await sanityClient.GetAllPersons();
+  console.log(persons.length);
+  console.log("End of Flow Two!");
 };
 
 /**
@@ -66,6 +87,7 @@ const getAllData = async (sanityClient) => {
   await sanityClient.GetAllDocumentsOfType("movie");
   await sanityClient.GetAllDocumentsOfType("screening");
   await sanityClient.GetAllPersons();
+  console.log("Fetched the required data!");
 };
 
 Run();
